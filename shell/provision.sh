@@ -115,7 +115,7 @@ sudo apt install -y phpmyadmin
 
 # Postfix
 echo "[VAGRANT] Installing postfix"
-sudo debconf-set-selections <<< "postfix postfix/mailname string ${HOSTNAME}"
+sudo debconf-set-selections <<< "postfix postfix/mailname string ${LOCAL_HOSTNAME}"
 sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
 
 sudo apt -y install mailutils

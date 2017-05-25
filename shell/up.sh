@@ -1,6 +1,4 @@
 #!/bin/bash
-
-sudo apt update && sudo apt -y upgrade && sudo apt -y autoremove
 source /vagrant/shell/conf/variables.conf
 
 if [ ! -d ${GUEST_MIGRATE_PATH} ]; then

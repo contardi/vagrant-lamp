@@ -3,21 +3,7 @@
 #pt_BR
 sudo locale-gen pt_BR.UTF-8
 
-# Use single quotes instead of double quotes to make it work with special-character passwords
-MYSQL_PASSWORD='root'
-HOMEDIRFOLDER='www'
-PROJECT_ROOT='contardi'
-SERVER_ADMIN='thiago@contardi.com.br'
-LOCAL_HOSTNAME='dev.contardi.com.br'
-GUEST_VERSION_FILE="/var/vagrant/version"
-VERSION="0.1.0"
-SERVER_IP="192.168.33.10"
-
-
-PHP_CONFIG_FILE="/etc/php/7.0/apache2/php.ini"
-XDEBUG_CONFIG_FILE="/etc/php/7.0/mods-available/xdebug.ini"
-MYSQL_CONFIG_FILE="/etc/mysql/mysql.conf.d/mysqld.cnf"
-APACHE_DEFAULT_VHOST=" /etc/apache2/sites-available/000-default.conf"
+source /vagrant/shell/conf/variables.conf
 
 # create project folder
 sudo mkdir -p "/var/www/${PROJECT_ROOT}/public"
@@ -57,6 +43,29 @@ xdebug.remote_port=9000
 xdebug.remote_host=10.0.2.2
 EOF
 
+
+
+# INIT APACHE2
+# setup host file
+echo "[VAGRANT] Installing Apache2 with default HOST..."
+VHOST=$(cat <<EOF
+<VirtualHost *:80>
+    ServerAdmin ${SERVER_ADMIN}
+    DocumentRoot "/var/www/${PROJECT_ROOT}/public"
+
+	LogLevel debug
+
+	ErrorLog /var/log/apache2/error.log
+	CustomLog /var/log/apache2/access.log combined
+
+    <Directory "/var/www/${PROJECT_ROOT}/public">
+        AllowOverride All
+        Require all granted
+    </Directory>
+</VirtualHost>
+EOF
+)
+echo "${VHOST}" > ${APACHE_DEFAULT_VHOST}
 
 
 # Composer
@@ -102,29 +111,6 @@ sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/mysql/app-pass password $
 sudo debconf-set-selections <<< "phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2"
 sudo apt install -y phpmyadmin
 # END PHPMyAdmin
-
-
-# INIT APACHE2
-# setup hosts file
-echo "[VAGRANT] Installing Apache2 with default HOST..."
-VHOST=$(cat <<EOF
-<VirtualHost *:80>
-    ServerAdmin ${SERVER_ADMIN}
-    DocumentRoot "/var/www/${PROJECT_ROOT}/public"
-
-	LogLevel debug
-
-	ErrorLog /var/log/apache2/error.log
-	CustomLog /var/log/apache2/access.log combined
-
-    <Directory "/var/www/${PROJECT_ROOT}/public">
-        AllowOverride All
-        Require all granted
-    </Directory>
-</VirtualHost>
-EOF
-)
-echo "${VHOST}" > ${APACHE_DEFAULT_VHOST}
 
 
 # Postfix

@@ -21,23 +21,18 @@ Vagrant.configure("2") do |config|
   #config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "192.168.33.10"
 
   # argument is a set of non-required options.
-  config.vm.synced_folder "./www", "/var/www"
+  config.vm.synced_folder "./www", "/var/www", owner: "www-data", group: "www-data"
   config.vm.synced_folder ".", "/vagrant"
 
   config.vm.network "private_network", ip: "192.168.33.10"
 
   config.vm.provider "virtualbox" do |v|
       v.name = "lamp"
+      v.memory = 1536
+      v.cpus = 2
   end
 
-  system("
-      if [ #{ARGV[0]} = 'up' ]; then
-          LOCAL_PATH='./www/'
-          if [ ! -d ${LOCAL_PATH} ]; then
-              mkdir ${LOCAL_PATH}
-          fi
-      fi
-  ")
+  system("/bin/bash ./shell/host.sh #{ARGV[0]}")
 
   # View the documentation for the provider you are using for more
   # information on available options.

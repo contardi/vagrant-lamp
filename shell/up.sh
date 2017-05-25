@@ -1,10 +1,7 @@
 #!/bin/bash
 
 sudo apt update && sudo apt -y upgrade && sudo apt -y autoremove
-
-MIGRATE_PATH="/vagrant/shell/migrate/"
-GUEST_VERSION_FILE="/var/vagrant/version"
-GUEST_MIGRATE_PATH="/var/vagrant/scripts/"
+source /vagrant/shell/conf/variables.conf
 
 if [ ! -d ${GUEST_MIGRATE_PATH} ]; then
     sudo mkdir -p ${GUEST_MIGRATE_PATH};

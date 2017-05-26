@@ -139,7 +139,7 @@ sudo service apache2 restart
 sudo service mysql restart
 
 # Essesntials
-sudo apt -y install build-essential binutils-doc mailutils vim htop ntp ntpdate curl make openssl unzip
+sudo apt -y install build-essential binutils-doc mailutils vim htop ntp ntpdate curl make openssl unzip zip
 
 #Autoremove
 sudo apt -y autoremove

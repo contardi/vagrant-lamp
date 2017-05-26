@@ -11,17 +11,15 @@ Vagrant.configure("2") do |config|
   config.vm.box = "ubuntu/xenial64"
 
   # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine and only allow access
   # via 127.0.0.1 to disable public access
   Vagrant.configure("2") do |config|
     config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "192.168.33.10"
     config.vm.network "forwarded_port", guest: 443, host: 443, host_ip: "192.168.33.10"
     config.vm.network "forwarded_port", guest: 3306, host: 3306
   end
-  #config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "192.168.33.10"
 
   # argument is a set of non-required options.
-  config.vm.synced_folder "./www", "/var/www", owner: "www-data", group: "www-data"
+  config.vm.synced_folder "./www", "/var/www", create: true, type: "nfs", :mount_options => ['vers=4', 'nolock', 'tcp']
   config.vm.synced_folder ".", "/vagrant"
 
   config.vm.network "private_network", ip: "192.168.33.10"

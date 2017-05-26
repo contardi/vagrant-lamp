@@ -31,7 +31,7 @@ sudo apt install -y php-curl php-mcrypt php-xdebug php-pear php-mysql php-curl p
 
 sed -i "s/display_startup_errors = Off/display_startup_errors = On/g" ${PHP_CONFIG_FILE}
 sed -i "s/display_errors = Off/display_errors = On/g" ${PHP_CONFIG_FILE}
-
+sed -i "s/memory_limit 128/memory_limit = 512/g" ${PHP_CONFIG_FILE}
 
 
 echo "[VAGRANT] Installing PHP XDebug"

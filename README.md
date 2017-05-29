@@ -2,6 +2,8 @@
 
 A LAMP Vagrant Box
 
+You can change the default options at shell/conf/variables.conf
+
 * Ubuntu 16.04 
 * PHP7
 * Apache
@@ -10,4 +12,5 @@ A LAMP Vagrant Box
 * Composer
 * PhpMyAdmin
 * PHP Unit
+* Node JS
 * Postfix (send only)

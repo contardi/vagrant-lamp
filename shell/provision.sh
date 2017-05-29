@@ -3,7 +3,7 @@
 #pt_BR
 sudo locale-gen pt_BR.UTF-8
 
-source /vagrant/shell/conf/variables.conf
+source /vagrant/conf/variables.conf
 
 # create project folder
 sudo mkdir -p "/var/www/${PROJECT_ROOT}/public"
@@ -48,7 +48,7 @@ EOF
 # INIT APACHE2
 # setup host file
 echo "[VAGRANT] Installing Apache2 with default HOST..."
-VHOST=$(cat <<EOF
+cat <<EOF > "${APACHE_DEFAULT_VHOST}"
 <VirtualHost *:80>
     ServerAdmin ${SERVER_ADMIN}
     DocumentRoot "/var/www/${PROJECT_ROOT}/public"
@@ -64,8 +64,7 @@ VHOST=$(cat <<EOF
     </Directory>
 </VirtualHost>
 EOF
-)
-echo "${VHOST}" > "${APACHE_DEFAULT_VHOST}"
+
 
 
 # Composer
@@ -138,9 +137,24 @@ sudo service apache2 restart
 # restart mysql
 sudo service mysql restart
 
-# Essesntials
-sudo apt -y install build-essential binutils-doc mailutils vim htop ntp ntpdate curl make openssl unzip zip
 
+
+#Install Node
+echo "[VAGRANT] Installing Node js"
+sudo apt -y install build-essential libssl-dev tcl
+
+curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+sudo apt -y install nodejs
+
+
+
+
+# Essesntials
+echo "[VAGRANT] Installing essenciall"
+sudo apt -y install binutils-doc mailutils vim htop ntp ntpdate curl make openssl unzip zip
+
+
+echo "[VAGRANT] Cleaning up"
 #Autoremove
 sudo apt -y autoremove
 

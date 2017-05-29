@@ -38,7 +38,7 @@ for f in $(ls $SQL_PATH) ; do
             VERSION=$( echo ${f} | sed "s/\.sql//" )
             $( sudo sh -c "echo "${VERSION}" > ${GUEST_SQL_FILE}" )
             /bin/bash ${SQL_PATH}${f}
-            mysql -h localhost -u root -p$MYSQL_PASSWORD -e "source ${SQL_PATH}${f}"
+            sudo mysql -h localhost -u root -p$MYSQL_PASSWORD -e "source ${SQL_PATH}${f}"
             sudo cp ${SQL_PATH}${f} ${GUEST_SQL_PATH}${f}
         fi
     fi

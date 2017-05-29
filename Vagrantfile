@@ -20,8 +20,8 @@ Vagrant.configure("2") do |config|
 
   # argument is a set of non-required options.
 
-  config.vm.synced_folder "./www", "/var/www", nfs: true, nfs_version: 4, nfs_udp: false,  mount_options: ['async']
-  config.vm.synced_folder "./shell", "/vagrant", nfs: true, nfs_version: 4, nfs_udp: false,  mount_options: ['async']
+  config.vm.synced_folder "./www", "/var/www", nfs: true, nfs_udp: false,  mount_options: ['async']
+  config.vm.synced_folder "./shell", "/vagrant", nfs: true, nfs_udp: false,  mount_options: ['async']
 
   config.vm.network "private_network", ip: "192.168.33.10"
 

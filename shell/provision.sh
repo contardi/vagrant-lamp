@@ -35,7 +35,7 @@ sed -i "s/memory_limit 128/memory_limit = 512/g" ${PHP_CONFIG_FILE}
 
 
 echo "[VAGRANT] Installing PHP XDebug"
-cat << EOF > ${XDEBUG_CONFIG_FILE}
+cat << EOF > "${XDEBUG_CONFIG_FILE}"
 zend_extension=xdebug.so
 xdebug.remote_enable=1
 xdebug.remote_connect_back=1
@@ -65,7 +65,7 @@ VHOST=$(cat <<EOF
 </VirtualHost>
 EOF
 )
-echo "${VHOST}" > ${APACHE_DEFAULT_VHOST}
+echo "${VHOST}" > "${APACHE_DEFAULT_VHOST}"
 
 
 # Composer

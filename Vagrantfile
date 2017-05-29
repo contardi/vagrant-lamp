@@ -19,8 +19,9 @@ Vagrant.configure("2") do |config|
   end
 
   # argument is a set of non-required options.
-  config.vm.synced_folder "./www", "/var/www", create: true, type: "nfs", :mount_options => ['vers=4', 'nolock', 'tcp']
-  config.vm.synced_folder ".", "/vagrant"
+
+  config.vm.synced_folder "./www", "/var/www", create: true, type: "nfs", nfs_udp: false, :mount_options => ['nolock', 'tcp']
+  config.vm.synced_folder ".", "/vagrant", "nfs": true
 
   config.vm.network "private_network", ip: "192.168.33.10"
 

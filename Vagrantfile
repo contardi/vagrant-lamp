@@ -26,11 +26,13 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./www", "/var/www",
     create: true,
     nfs: true,
-    linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
+    linux__nfs_options: ['rw','no_subtree_check','all_squash','async'],
+    bsd__nfs_options: ['async', '-alldirs', '-mapall=501:20']
 
   config.vm.synced_folder "./shell", "/vagrant",
     nfs: true,
-    linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
+    linux__nfs_options: ['rw','no_subtree_check','all_squash','async'],
+    bsd__nfs_options: ['async', '-alldirs', '-mapall=501:20']
 
   config.vm.network "private_network", ip: "192.168.33.10"
 

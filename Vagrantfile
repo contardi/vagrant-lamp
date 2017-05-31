@@ -20,8 +20,17 @@ Vagrant.configure("2") do |config|
 
   # argument is a set of non-required options.
 
-  config.vm.synced_folder "./www", "/var/www", create: true,  nfs: true, nfs_udp: false,  mount_options: ['async']
-  config.vm.synced_folder "./shell", "/vagrant", nfs: true, nfs_udp: false,  mount_options: ['async']
+  config.nfs.map_uid = Process.uid
+  config.nfs.map_gid = Process.gid
+
+  config.vm.synced_folder "./www", "/var/www",
+    create: true,
+    nfs: true,
+    linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
+
+  config.vm.synced_folder "./shell", "/vagrant",
+    nfs: true,
+    linux__nfs_options: ['rw','no_subtree_check','all_squash','async']
 
   config.vm.network "private_network", ip: "192.168.33.10"
 

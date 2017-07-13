@@ -13,12 +13,13 @@ Vagrant.configure("2") do |config|
   # Create a forwarded port mapping which allows access to a specific port
   # via 127.0.0.1 to disable public access
   Vagrant.configure("2") do |config|
-    config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "192.168.33.10"
-    config.vm.network "forwarded_port", guest: 443, host: 443, host_ip: "192.168.33.10"
+    config.vm.network "forwarded_port", guest: 80, host: 80, host_ip: "192.168.50.10"
+    config.vm.network "forwarded_port", guest: 443, host: 443, host_ip: "192.168.50.10"
     config.vm.network "forwarded_port", guest: 3306, host: 3306
   end
 
   # argument is a set of non-required options.
+  config.vbguest.auto_update = true
 
   config.vm.synced_folder "./www", "/var/www",
     create: true,
@@ -26,12 +27,12 @@ Vagrant.configure("2") do |config|
     linux__nfs_options: ['rw','no_subtree_check','all_squash','async'],
     bsd__nfs_options: ['async', '-alldirs', '-mapall=501:20']
 
-  config.vm.synced_folder "./shell", "/vagrant"
+  config.vm.synced_folder "./shell", "/vagrant", nfs: true
 
-  config.vm.network "private_network", ip: "192.168.33.10"
+  config.vm.network "private_network", ip: "192.168.50.10"
 
   config.vm.provider "virtualbox" do |v|
-      v.name = "lamp"
+      v.name = "lamp.php7"
       v.memory = 1536
       v.cpus = 2
   end

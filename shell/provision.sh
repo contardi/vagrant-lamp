@@ -45,8 +45,9 @@ installNodeJS
 
 installMemcache
 
+installMongoDB
+
 installRedis #TODO
-installMongoDB #TODO
 installSonarQube #TODO
 
 # enable mod_rewrite

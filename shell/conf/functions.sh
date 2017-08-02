@@ -135,12 +135,31 @@ installNodeJS() {
     sudo npm install -g bower grunt-cli gulp
 }
 
-
 installMemcache() {
     # Redis Cache
     echo "[VAGRANT] Installing Memcached"
-    sudo apt-get -y install memcached php-memcached
+    sudo apt -y install memcached php-memcached
 }
+
+installMongoDB() {
+    # Redis Cache
+    echo "[VAGRANT] Installing Mongo"
+
+    # Import the MongoDB public GPG Key and create a list file - https://docs.mongodb.org/manual/tutorial/install-mongodb-on-ubuntu/
+    sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+    sudo echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+
+    # Update package lists
+    sudo apt -y update
+
+    # Install MongoDB
+    sudo apt install -y mongodb-org
+
+    # Start MondoDB
+    sudo service mongod start
+    sudo systemctl enable mongod.service
+}
+
 
 #@TODO
 installRedis() {
@@ -148,11 +167,6 @@ installRedis() {
     echo "[VAGRANT] Installing Redis"
 }
 
-#@TODO
-installMongoDB() {
-    # Redis Cache
-    echo "[VAGRANT] Installing Mongo"
-}
 
 #@TODO
 installSonarQube() {

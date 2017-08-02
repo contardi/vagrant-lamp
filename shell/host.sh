@@ -1,5 +1,5 @@
 #!/bin/bash
-source ./conf/variables.conf
+source $(dirname $0)/conf/variables.conf
 
 ETC_HOSTS="/etc/hosts"
 

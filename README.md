@@ -12,5 +12,6 @@ You can change the default options at shell/conf/variables.conf
 * Composer
 * PhpMyAdmin
 * PHP Unit
+* MongoDB
 * Node JS
 * Postfix (send only)

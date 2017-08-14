@@ -11,8 +11,10 @@ installApache() {
     # setup host file
     echo "[VAGRANT] Installing Apache2 with default HOST..."
 
+
     sudo apt install -y apache2
-cat <<EOF > "${APACHE_DEFAULT_VHOST}"
+    sudo mkdir -p /etc/apache2/sites-available/
+    VHOST=$(cat <<EOF
 <VirtualHost *:80>
     ServerAdmin ${SERVER_ADMIN}
     DocumentRoot "/var/www/${PROJECT_ROOT}/public"
@@ -28,6 +30,8 @@ cat <<EOF > "${APACHE_DEFAULT_VHOST}"
     </Directory>
 </VirtualHost>
 EOF
+)
+    echo "${VHOST}" > ${APACHE_DEFAULT_VHOST}
 }
 
 installPHP() {
@@ -67,9 +71,9 @@ installPHPUnit() {
     # Install PHP Unity
     echo "[VAGRANT] Installing PHP Unity..."
     if [ ! -f "/usr/local/bin/phpunit" ]; then
-        wget https://phar.phpunit.de/phpunit-6.1.phar
-        chmod +x phpunit-6.1.phar
-        sudo mv phpunit-6.1.phar /usr/local/bin/phpunit
+        wget https://phar.phpunit.de/phpunit-6.2.phar
+        chmod +x phpunit-6.2.phar
+        sudo mv phpunit-6.2.phar /usr/local/bin/phpunit
     fi
 }
 
@@ -127,12 +131,13 @@ EOF
 installNodeJS() {
     #Install Node
     echo "[VAGRANT] Installing Node js, Gulp Bower and Grunt"
-    sudo apt -y install build-essential libssl-dev tcl
+    sudo apt -y install build-essential libssl-dev tcl python-software-properties
 
-    curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
+    curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+
     sudo apt -y install nodejs
 
-    sudo npm install -g bower grunt-cli gulp
+    sudo npm install -g grunt-cli gulp
 }
 
 installMemcache() {

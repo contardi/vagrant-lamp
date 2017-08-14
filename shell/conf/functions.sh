@@ -3,7 +3,7 @@
 installEssencials() {
     # Essesntials
     echo "[VAGRANT] Installing essenciall"
-    sudo apt -y install binutils-doc mailutils vim htop ntp ntpdate curl make openssl unzip zip imagemagick bc
+    sudo apt -y install binutils-doc vim htop ntp ntpdate curl make openssl unzip zip imagemagick bc
 }
 
 installApache() {

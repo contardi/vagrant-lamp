@@ -11,9 +11,8 @@ installApache() {
     # setup host file
     echo "[VAGRANT] Installing Apache2 with default HOST..."
 
-
     sudo apt install -y apache2
-    sudo mkdir -p /etc/apache2/sites-available/
+
     VHOST=$(cat <<EOF
 <VirtualHost *:80>
     ServerAdmin ${SERVER_ADMIN}

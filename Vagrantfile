@@ -21,6 +21,9 @@ Vagrant.configure("2") do |config|
   # argument is a set of non-required options.
   config.vbguest.auto_update = true
 
+  config.nfs.map_uid = Process.uid
+  config.nfs.map_gid = Process.gid
+
   config.vm.synced_folder "./www", "/var/www",
     create: true,
     nfs: true,

@@ -6,11 +6,6 @@ sudo locale-gen pt_BR.UTF-8
 source /vagrant/conf/variables.conf
 source /vagrant/conf/functions.sh
 
-# create project folder
-sudo mkdir -p "/var/www/${PROJECT_ROOT}/public"
-
-echo "<?php phpinfo(); ?>" > /var/www/${PROJECT_ROOT}/public/info.php
-
 # update / upgrade
 echo "[VAGRANT] INIT, update and upgrade"
 sudo apt -y update

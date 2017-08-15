@@ -11,6 +11,13 @@ installApache() {
     # setup host file
     echo "[VAGRANT] Installing Apache2 with default HOST..."
 
+    if [ ! -d $APACHE_WWW_DIR ]; then
+        sudo mkdir -p $APACHE_WWW_DIR;
+    fi;
+
+    # create project folder
+    sudo mkdir -p "/var/www/${PROJECT_ROOT}/public"
+
     sudo apt install -y apache2
 
     VHOST=$(cat <<EOF

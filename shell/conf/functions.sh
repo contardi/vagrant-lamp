@@ -63,7 +63,6 @@ xdebug.remote_host=10.0.2.2
 EOF
 }
 
-
 installComposer() {
     # Composer
     echo "[VAGRANT] Installing composer..."
@@ -71,7 +70,6 @@ installComposer() {
     php composer-setup.php --filename=composer  --install-dir=/usr/bin
     php -r "unlink('composer-setup.php');"
 }
-
 
 installPHPUnit() {
     # Install PHP Unity
@@ -82,7 +80,6 @@ installPHPUnit() {
         sudo mv phpunit-6.2.phar /usr/local/bin/phpunit
     fi
 }
-
 
 installMySQL() {
     # INIT MYSQL
@@ -99,8 +96,6 @@ installMySQL() {
     # END MYSQL
 }
 
-
-
 installPHPMyAdmin() {
     # INIT PHPMyAdmin
     sudo echo "[VAGRANT] Installing PHPMyAdmin..."
@@ -112,8 +107,6 @@ installPHPMyAdmin() {
     sudo apt install -y phpmyadmin
     # END PHPMyAdmin
 }
-
-
 
 installPostfix() {
     # Postfix
@@ -136,14 +129,10 @@ EOF
 
 installNodeJS() {
     #Install Node
-    echo "[VAGRANT] Installing Node js, Gulp Bower and Grunt"
+    echo "[VAGRANT] Installing Node js,"
     sudo apt -y install build-essential libssl-dev tcl python-software-properties
-
     curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-
     sudo apt -y install nodejs
-
-    sudo npm install -g grunt-cli gulp
 }
 
 installMemcache() {

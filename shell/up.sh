@@ -7,7 +7,7 @@ if [ ! -d ${GUEST_MIGRATE_PATH} ]; then
 fi
 
 if [ ! -f ${GUEST_VERSION_FILE} ]; then
-    sudo touch  ${GUEST_VERSION_FILE};
+    sudo touch ${GUEST_VERSION_FILE};
 fi
 
 for f in $(ls $MIGRATE_PATH) ; do

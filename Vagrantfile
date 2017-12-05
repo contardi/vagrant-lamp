@@ -32,7 +32,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.synced_folder "./shell", "/vagrant", nfs: true
 
-  config.vm.network "private_network", ip: "192.168.50.10"
+  config.vm.network "private_network", ip: "192.168.33.10"
 
   config.vm.provider "virtualbox" do |v|
       v.name = "lamp.php7"

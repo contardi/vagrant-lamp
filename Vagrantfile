@@ -27,6 +27,8 @@ Vagrant.configure("2") do |config|
   config.vm.synced_folder "./www", "/var/www",
     create: true,
     nfs: true,
+    nfs_version: 4,
+    nfs_udp: false,
     linux__nfs_options: ['rw','no_subtree_check','all_squash','async'],
     bsd__nfs_options: ['async', '-alldirs', '-mapall=501:20']
 
